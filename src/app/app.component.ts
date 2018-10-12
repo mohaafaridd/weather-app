@@ -23,8 +23,8 @@ export class AppComponent {
 
     this._weather.getWeatherData()
       .subscribe(res => {
-        let temp_max = res['list'].map(res => res.main.temp_max);
-        let temp_min = res['list'].map(res => res.main.temp_min);
+        let temp = res['list'].map(res => res.main.temp);
+        let humidity = res['list'].map(res => res.main.humidity);
         let alldates = res['list'].map(res => res.dt)
 
 
@@ -40,12 +40,16 @@ export class AppComponent {
             labels: weatherDates,
             datasets: [
               {
-                data: temp_max,
+                label: 'Temperature',
+                data: temp,
+                backgroundColor: "#3cba9f",
                 borderColor: "#3cba9f",
                 fill: false
               },
               {
-                data: temp_min,
+                label: 'Humidity',
+                data: humidity,
+                backgroundColor: "#ffcc00",
                 borderColor: "#ffcc00",
                 fill: false
               },
@@ -53,7 +57,7 @@ export class AppComponent {
           },
           options: {
             legend: {
-              display: false
+              display: true
             },
             scales: {
               xAxes: [{
